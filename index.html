@@ -46,9 +46,13 @@
       display: flex;
       align-items: center;
       justify-content: space-evenly;
-      flex-wrap: wrap;
+      flex-grow: 1;
       width: 100%
       margin: 0;
+    }
+    .status-line span {
+      flex: 1;
+      text-align: center;
     }
 
   </style>
@@ -84,13 +88,13 @@
 
         document.querySelector('.card').innerHTML = `
           <div class="ribbon ${ribbonClass}">
-          <p class="status-line">
+          <div class="status-line">
           <span><strong>Humidifier</strong></span>
           <span><strong>Power:</strong> ${power}</span>
           <span><strong>Mode:</strong> ${workMode} </span>
           <span><strong>Humidity:</strong> ${humidity}%</span>
           <span><strong>${emptyMsg}</strong></span>
-          </p>
+          </div>
           </div>
         `;
       } catch (error) {
