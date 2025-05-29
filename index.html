@@ -81,17 +81,12 @@
         const device = result.payload.device;
         const power = data.find(cap => cap.instance === 'powerSwitch').state.value ? 'On' : 'Off';
         const workMode = data.find(cap => cap.instance === 'workMode').state.value.workMode;
-        const brightness = data.find(cap => cap.instance === 'brightness').state.value;
-        const nightlight = data.find(cap => cap.instance === 'nightlightToggle').state.value ? 'On' : 'Off';
+        const humidity = data.find(cap => cap.instance === 'humidity').state.value;
 
         document.querySelector('.card').innerHTML = `
           <div class="ribbon"></div>
-          <h2>Device State</h2>
-          <p><strong>Device:</strong> ${device}</p>
-          <p><strong>Power:</strong> ${power}</p>
-          <p><strong>Work Mode:</strong> ${workMode}</p>
-          <p><strong>Brightness:</strong> ${brightness}%</p>
-          <p><strong>Nightlight:</strong> ${nightlight}</p>
+          <h2>Humidifier</h2>
+          <p><strong>Power:</strong> ${power} <strong>Work Mode:</strong> ${workMode} <strong>Humidity:</strong> ${humidity}%</p>
         `;
       } catch (error) {
         console.error('Error fetching device state:', error);
