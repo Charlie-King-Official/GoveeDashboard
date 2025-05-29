@@ -10,12 +10,17 @@
 
   <script>
     async function fetchDeviceState() {
-      const response = await fetch('http://localhost:3000/get-device-state', {
-        method: 'POST'
-      });
-      const data = await response.json();
-      document.getElementById('output').textContent = JSON.stringify(data, null, 2);
-    }
+      try {
+        const response = await fetch('http://localhost:3000/get-device-state', {
+          method: 'POST'
+        });
+        const data = await response.json();
+        document.getElementById('output').textContent = JSON.stringify(data, null, 2);
+      } catch (error) {
+        console.error('Error fetching device state:', error);
+        document.getElementById('output').textContent = 'Error fetching device state.';
+      }
+    }
   </script>
 </body>
 </html>
