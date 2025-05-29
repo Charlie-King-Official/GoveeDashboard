@@ -1,33 +1,109 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Govee Device State</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Govee Device State</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      max-width: 300px;
+      width: 100%;
+      text-align: center;
+    }
+    .card h2 {
+      margin: 0 0 10px;
+      font-size: 1.5em;
+    }
+    .card p {
+      margin: 5px 0;
+      font-size: 1em;
+    }
+    .ribbon {
+      position: absolute;
+      top: 10px;
+      left: -5px;
+      width: 75px;
+      height: 75px;
+      overflow: hidden;
+    }
+    .ribbon::before,
+    .ribbon::after {
+      content: "";
+      position: absolute;
+      display: block;
+      width: 100px;
+      height: 100px;
+      border: 5px solid #ff6347;
+    }
+    .ribbon::before {
+      top: 0;
+      right: 0;
+      border-top-color: transparent;
+      border-left-color: transparent;
+    }
+    .ribbon::after {
+      bottom: 0;
+      left: 0;
+      border-bottom-color: transparent;
+      border-right-color: transparent;
+    }
+  </style>
 </head>
 <body>
+  <div class="card">
+    <div class="ribbon"></div>
+    <h2>Device State</h2>
+    <p><strong>Device:</strong> 13:F7:E8:06:90:19:4C:70</p>
+    <p><strong>Power:</strong> On</p>
+    <p><strong>Work Mode:</strong> 3</p>
+    <p><strong>Brightness:</strong> 100%</p>
+    <p><strong>Nightlight:</strong> On</p>
+  </div>
+  <script>
+    async function fetchDeviceState() {
+      try {
+        const response = await fetch('/get-device-state', {
+          method: 'POST'
+        });
+        const result = await response.json();
+        const data = result.payload.capabilities;
 
-<h1>Device State</h1>
-<pre id="output">Loading...</pre>
+        const device = result.payload.device;
+        const power = data.find(cap => cap.instance === 'powerSwitch').state.value ? 'On' : 'Off';
+        const workMode = data.find(cap => cap.instance === 'workMode').state.value.workMode;
+        const brightness = data.find(cap => cap.instance === 'brightness').state.value;
+        const nightlight = data.find(cap => cap.instance === 'nightlightToggle').state.value ? 'On' : 'Off';
 
-<script>
-  async function fetchDeviceState() {
-    try {
-      const response = await fetch('/get-device-state', {
-        method: 'POST'
-      });
-      const data = await response.json();
-      document.getElementById('output').textContent = JSON.stringify(data, null, 2);
-    } catch (error) {
-      console.error('Error fetching device state:', error);
-      document.getElementById('output').textContent = 'Error fetching device state.';
-    }
-  }
+        document.querySelector('.card').innerHTML = `
+          <div class="ribbon"></div>
+          <h2>Device State</h2>
+          <p><strong>Device:</strong> ${device}</p>
+          <p><strong>Power:</strong> ${power}</p>
+          <p><strong>Work Mode:</strong> ${workMode}</p>
+          <p><strong>Brightness:</strong> ${brightness}%</p>
+          <p><strong>Nightlight:</strong> ${nightlight}</p>
+        `;
+      } catch (error) {
+        console.error('Error fetching device state:', error);
+        document.querySelector('.card').innerHTML = 'Error fetching device state.';
+      }
+    }
 
-  // Fetch immediately on page load
-  fetchDeviceState();
-
-  // Refresh every 2 minutes (120,000 milliseconds)
-  setInterval(fetchDeviceState, 120000);
-</script>
-
+    fetchDeviceState();
+    setInterval(fetchDeviceState, 120000);
+  </script>
 </body>
 </html>
