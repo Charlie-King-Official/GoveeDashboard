@@ -15,8 +15,6 @@
     }
     .card {
       border-radius: 0px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      padding: 20px;
       max-width: 100%;
       width: 100%;
       text-align: center;
@@ -30,12 +28,13 @@
       font-size: 1em;
     }
     .ribbon {
-      overflow: hidden;
-      content: "";
       display: flex;
       align-items: center;
-      width: 100%;
+      justify-content: center;
       height: 50px;
+      width: 100%;
+      padding: 0 1rem;
+      box-sizing: border-box;
     }
     .ribbon.safe {
       background-color: rgba(50, 160, 255, 0.6); /* light blue */
@@ -47,10 +46,9 @@
       display: flex;
       align-items: center;
       justify-content: space-around;
-      gap: 1rem;
       flex-wrap: wrap;
       width: 100%
-      box-sizing: border-box;
+      margin: 0;
     }
 
   </style>
