@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Govee Device State</title>
+</head>
+<body>
+  <h1>Device State</h1>
+  <button onclick="fetchDeviceState()">Get State</button>
+  <pre id="output"></pre>
+
+  <script>
+    async function fetchDeviceState() {
+      const response = await fetch('http://localhost:3000/get-device-state', {
+        method: 'POST'
+      });
+      const data = await response.json();
+      document.getElementById('output').textContent = JSON.stringify(data, null, 2);
+    }
+  </script>
+</body>
+</html>
