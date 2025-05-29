@@ -65,9 +65,7 @@
 <body>
   <div class="card">
     <div class="ribbon"></div>
-    <h2>Humidifier</h2>
-    <p><strong>Power:</strong> On</p>
-    <p><strong>Work Mode:</strong> 3</p>
+    <h2>Fetching Humidifier Status</h2>
   </div>
   <script>
     async function fetchDeviceState() {
@@ -80,13 +78,17 @@
 
         const device = result.payload.device;
         const power = data.find(cap => cap.instance === 'powerSwitch').state.value ? 'On' : 'Off';
-        const workMode = data.find(cap => cap.instance === 'workMode').state.value.workMode;
+        const workModeValue = data.find(cap => cap.instance === 'workMode').state.value.workMode;
+        const workMode = {
+          1: 'Manual',
+          2: 'Custom',
+          3: 'Auto'
+        }[workModeValue] || 'Unknown';
         const humidity = data.find(cap => cap.instance === 'humidity').state.value;
 
         document.querySelector('.card').innerHTML = `
           <div class="ribbon"></div>
-          <h2>Humidifier</h2>
-          <p><strong>Power:</strong> ${power} <strong>Work Mode:</strong> ${workMode} <strong>Humidity:</strong> ${humidity}%</p>
+          <p><strong> Humidifier   Power:</strong> ${power} <strong>   Mode:</strong> ${workMode} <strong>   Humidity:</strong> ${humidity}%</p>
         `;
       } catch (error) {
         console.error('Error fetching device state:', error);
