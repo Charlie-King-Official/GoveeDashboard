@@ -77,6 +77,7 @@
         const humidity = data.find(cap => cap.instance === 'humidity').state.value;
         const lackWater = data.find(cap => cap.instance === 'lackWaterEvent')?.state?.value;
         const ribbonClass = lackWater ? 'alert' : 'safe';
+        const emptyMsg = lackWater ? 'Reservoir Empty' : '';
 
 
         document.querySelector('.card').innerHTML = `
@@ -86,6 +87,7 @@
           <span>Power:</strong> ${power}</span>
           <span><strong>Mode:</strong> ${workMode} </span>
           <span><strong>Humidity:</strong> ${humidity}%</span>
+          <span><strong>${emptyMsg}</strong></span>
           </p>
           </div>
         `;
