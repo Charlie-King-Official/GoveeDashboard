@@ -1,5 +1,5 @@
-
-{ "name": "govee-device-state",
+{
+  "name": "govee-device-state",
   "version": "1.0.0",
   "description": "A project to fetch and display Govee device state",
   "main": "server.js",
