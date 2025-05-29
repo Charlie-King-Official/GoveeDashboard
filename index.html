@@ -7,7 +7,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f4f4f9;
+      background-color: transparent;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -15,8 +15,8 @@
       margin: 0;
     }
     .card {
-      background: #fff;
-      border-radius: 8px;
+      background: transparent;
+      border-radius: 0px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       padding: 20px;
       max-width: 100%;
@@ -49,7 +49,8 @@
     }
     .ribbon.safe::before,
     .ribbon.safe::after {
-      border-color: #4CAF50; /* green */
+      background-color: #29E6EF; /* light blue */
+      opacity: 0.50;
     }
     .ribbon.alert::before,
     .ribbon.alert::after {
