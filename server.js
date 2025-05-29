@@ -35,7 +35,8 @@ app.post('/get-device-state', async (req, res) => {
     );
     res.json(response.data);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error('Govee API error:', error.response?.data || error.message);
+    res.status(500).json({ error: 'Failed to fetch device state' });
   }
 });
 
