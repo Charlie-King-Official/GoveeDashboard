@@ -1,14 +1,14 @@
 {
-  "name": "govee-device-state",
-  "version": "1.0.0",
-  "description": "A project to fetch and display Govee device state",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js"
-  },
-  "dependencies": {
-    "axios": "^0.21.1",
-    "cors": "^2.8.5",
-    "express": "^4.17.1"
-  }
+  "name": "govee-device-state",
+  "version": "1.0.0",
+  "description": "A project to fetch and display Govee device state",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  }
 }
