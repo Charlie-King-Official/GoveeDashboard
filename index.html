@@ -42,6 +42,12 @@
     .ribbon.alert {
       background-color: #FF6347; /* red */
     }
+    .status-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
 
   </style>
 </head>
@@ -75,7 +81,12 @@
 
         document.querySelector('.card').innerHTML = `
           <div class="ribbon ${ribbonClass}">
-          <p><strong> Humidifier   Power:</strong> ${power} <strong>   Mode:</strong> ${workMode} <strong>   Humidity:</strong> ${humidity}%</p>
+          <p class="status-line">
+          <span><strong>Humidifier</strong></span>
+          <span>Power:</strong> ${power}</span>
+          <span><strong>Mode:</strong> ${workMode} </span>
+          <span><strong>Humidity:</strong> ${humidity}%</span>
+          </p>
           </div>
         `;
       } catch (error) {
