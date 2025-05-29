@@ -11,7 +11,7 @@
   <script>
     async function fetchDeviceState() {
       try {
-        const response = await fetch('/get-device-state', {
+        const response = await fetch('https://goveedashboard.onrender.com/get-device-state', {
           method: 'POST'
         });
         const data = await response.json();
