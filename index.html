@@ -4,23 +4,30 @@
   <title>Govee Device State</title>
 </head>
 <body>
-  <h1>Device State</h1>
-  <button onclick="fetchDeviceState()">Get State</button>
-  <pre id="output"></pre>
 
-  <script>
-    async function fetchDeviceState() {
-      try {
-        const response = await fetch('https://goveedashboard.onrender.com/get-device-state', {
-          method: 'POST'
-        });
-        const data = await response.json();
-        document.getElementById('output').textContent = JSON.stringify(data, null, 2);
-      } catch (error) {
-        console.error('Error fetching device state:', error);
-        document.getElementById('output').textContent = 'Error fetching device state.';
-      }
-    }
-  </script>
+<h1>Device State</h1>
+<pre id="output">Loading...</pre>
+
+<script>
+  async function fetchDeviceState() {
+    try {
+      const response = await fetch('/get-device-state', {
+        method: 'POST'
+      });
+      const data = await response.json();
+      document.getElementById('output').textContent = JSON.stringify(data, null, 2);
+    } catch (error) {
+      console.error('Error fetching device state:', error);
+      document.getElementById('output').textContent = 'Error fetching device state.';
+    }
+  }
+
+  // Fetch immediately on page load
+  fetchDeviceState();
+
+  // Refresh every 2 minutes (120,000 milliseconds)
+  setInterval(fetchDeviceState, 120000);
+</script>
+
 </body>
 </html>
